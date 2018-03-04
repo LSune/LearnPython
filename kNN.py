@@ -53,3 +53,26 @@ def classify0(inX, dataSet, labels, k):
             
             sorted(students, key=operator.itemgetter(1,2))'''
     return sortedClassCount[0][0]
+
+def file2matrix(filename):
+    fr = open(filename)
+    arrayOLines = fr.readlines()
+    numberOfLines = len(arrayOLines)
+    returnMat = zeros((numberOfLines, 3))
+    '''zeros在matlab中表示一个生成0矩阵的一个函数。
+        
+        最常用的用法如下：
+        zeros(m, n);  % 生成一个m*n的零矩阵
+        zeros(m);     % 生成一个m*m的零矩阵（即m阶方阵）
+        zeros(m, n, k, ...);  % 生成一个m*n*k*...的零矩阵
+        zeros(size(A));  % 生成一个与矩阵A的维度一致的零矩阵'''
+    classLabelVector = []
+    index = 0
+    for line in arrayOLines:
+        line = line.strip()
+        listFromLine = line.split('\t')
+        returnMat [index,:] = listFromLine[0:3]#存疑
+        classLabelVector.append(int(listFromLine[-1]))
+        index += 1
+        return returnMat, classLabelVector
+
